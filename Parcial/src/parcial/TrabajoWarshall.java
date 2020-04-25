@@ -1,4 +1,4 @@
-package estructuras;
+package parcial;
 
 //NOMBRE: Julián David Acosta Ramirez
 //CÓDIGO: 1000252139
@@ -6,24 +6,54 @@ import java.util.Scanner;
 
 public class TrabajoWarshall {
 
-    public int[][] matrizdistancia = {{0, 4, 8, 999, 999}, {4, 0, 1, 2, 999}, {8, 999, 0, 4, 2}, {999, 2, 4, 0, 7}, {999, 999, 2, 7, 0}};
-    public int[][] matrizdistancia2 = {{0, 4, 8, 999, 999}, {4, 0, 1, 2, 999}, {8, 999, 0, 4, 2}, {999, 2, 4, 0, 7}, {999, 999, 2, 7, 0}};
-    public int[][] matrizcopia = new int[matrizdistancia.length][matrizdistancia.length];
+    
 
-    public static void main(String[] args) {
-        // TODO code application logic here
-        TrabajoWarshall cl = new TrabajoWarshall();
-        cl.RutaMasCorta();
-        cl.imprimir();
-        cl.calcularRuta();
+    private int[][] matrizdistancia; 
+    private int[][] matrizdistancia2;
+    private int[][] matrizcopia;
+
+    public TrabajoWarshall() {
     }
 
+    public TrabajoWarshall(int[][] matrizdistancia, int[][] matrizdistancia2, int[][] matrizcopia) {
+        this.matrizdistancia = matrizdistancia;
+        this.matrizdistancia2 = matrizdistancia2;
+        this.matrizcopia = matrizcopia;
+    }
+    
+    
+    
+    public int[][] getMatrizdistancia() {
+        return matrizdistancia;
+    }
+
+    public void setMatrizdistancia(int[][] matrizdistancia) {
+        this.matrizdistancia = matrizdistancia;
+    }
+
+    public int[][] getMatrizdistancia2() {
+        return matrizdistancia2;
+    }
+
+    public void setMatrizdistancia2(int[][] matrizdistancia2) {
+        this.matrizdistancia2 = matrizdistancia2;
+    }
+
+    public int[][] getMatrizcopia() {
+        return matrizcopia;
+    }
+
+    public void setMatrizcopia(int[][] matrizcopia) {
+        this.matrizcopia = matrizcopia;
+    }
+    
+    
     public void RutaMasCorta() {
-        for (int i = 0; i < matrizdistancia.length; i++) {
-            for (int j = 0; j < matrizdistancia.length; j++) {
-                for (int k = 0; k < matrizdistancia.length; k++) {
-                    if ((matrizdistancia[j][i] + matrizdistancia[i][k]) < matrizdistancia[j][k]) {
-                        matrizdistancia[j][k] = (matrizdistancia[j][i] + matrizdistancia[i][k]);
+        for (int i = 0; i < getMatrizdistancia().length; i++) {
+            for (int j = 0; j < getMatrizdistancia().length; j++) {
+                for (int k = 0; k < getMatrizdistancia().length; k++) {
+                    if ((getMatrizdistancia()[j][i] + getMatrizdistancia()[i][k]) < getMatrizdistancia()[j][k]) {
+                        getMatrizdistancia()[j][k] = (getMatrizdistancia()[j][i] + getMatrizdistancia()[i][k]);
                     }
                 }
             }
@@ -31,27 +61,27 @@ public class TrabajoWarshall {
     }
 
     public void calcularRuta() {
-        for (int i = 0; i < matrizdistancia2.length; i++) {
-            for (int j = 0; j < matrizdistancia2.length; j++) {
-                if (matrizdistancia2[i][j] == 999) {
-                    matrizcopia[i][j] = -1;
+        for (int i = 0; i < getMatrizdistancia2().length; i++) {
+            for (int j = 0; j < getMatrizdistancia2().length; j++) {
+                if (getMatrizdistancia2()[i][j] == 999) {
+                    getMatrizcopia()[i][j] = -1;
                 } else {
-                    matrizcopia[i][j] = i;
+                    getMatrizcopia()[i][j] = i;
                 }
             }
         }
 
-        for (int i = 0; i < matrizcopia.length; i++) {
-            matrizcopia[i][i] = i;
+        for (int i = 0; i < getMatrizcopia().length; i++) {
+            getMatrizcopia()[i][i] = i;
         }
 
-        for (int i = 0; i < matrizdistancia2.length; i++) {
-            for (int j = 0; j < matrizdistancia2.length; j++) {
-                for (int k = 0; k < matrizdistancia2.length; k++) {
-                    if ((matrizdistancia2[j][i] + matrizdistancia2[i][k]) < matrizdistancia2[j][k]) {
-                        matrizcopia[j][k] = matrizcopia[i][k];
-                        matrizcopia[0][3] = 1;
-                        matrizcopia[3][0] = 1;
+        for (int i = 0; i < getMatrizdistancia2().length; i++) {
+            for (int j = 0; j < getMatrizdistancia2().length; j++) {
+                for (int k = 0; k < getMatrizdistancia2().length; k++) {
+                    if ((getMatrizdistancia2()[j][i] + getMatrizdistancia2()[i][k]) < getMatrizdistancia2()[j][k]) {
+                        getMatrizcopia()[j][k] = getMatrizcopia()[i][k];
+                        getMatrizcopia()[0][3] = 1;
+                        getMatrizcopia()[3][0] = 1;
                     }
                 }
             }
@@ -69,16 +99,16 @@ public class TrabajoWarshall {
         System.out.println("Matriz de Adyacencia");
         System.out.println();
 
-        for (int i = 0; i < matrizcopia.length; i++) {
-            for (int j = 0; j < matrizcopia.length; j++) {
-                System.out.print(matrizcopia[i][j] + " ");
+        for (int i = 0; i < getMatrizcopia().length; i++) {
+            for (int j = 0; j < getMatrizcopia().length; j++) {
+                System.out.print(getMatrizcopia()[i][j] + " ");
             }
             System.out.println();
         }
 
-        while (matrizcopia[inicio][fin] != inicio) {
-            ruta = matrizcopia[inicio][fin] + " -> " + ruta;
-            fin = matrizcopia[inicio][fin];
+        while (getMatrizcopia()[inicio][fin] != inicio) {
+            ruta = getMatrizcopia()[inicio][fin] + " -> " + ruta;
+            fin = getMatrizcopia()[inicio][fin];
         }
 
         ruta = inicio + " -> " + ruta;
@@ -89,9 +119,9 @@ public class TrabajoWarshall {
         System.out.println("--------------------------------");
         System.out.println("Matriz de Distancias (Modificada)");
         System.out.println();
-        for (int i = 0; i < matrizdistancia.length; i++) {
-            for (int j = 0; j < matrizdistancia.length; j++) {
-                System.out.print(matrizdistancia[i][j] + " ");
+        for (int i = 0; i < getMatrizdistancia().length; i++) {
+            for (int j = 0; j < getMatrizdistancia().length; j++) {
+                System.out.print(getMatrizdistancia()[i][j] + " ");
             }
             System.out.println();
         }
