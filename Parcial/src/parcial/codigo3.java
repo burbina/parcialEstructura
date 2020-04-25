@@ -51,10 +51,10 @@ public class codigo3 {
         PrintWriter pw=null;
         BufferedReader br = null;
         try {
-            fichero = new FileWriter("C:\\datos\\salida.txt");
+            fichero = new FileWriter("C:\\1eval\\salida.txt");
      
             pw = new PrintWriter(fichero);
-            archivo = new File("C:\\datos\\entrada.txt");
+            archivo = new File("C:\\1eval\\entrada.txt");
             ficheroEntrada = new FileReader(archivo);
             br = new BufferedReader(ficheroEntrada);
             
@@ -66,22 +66,23 @@ public class codigo3 {
             while((linea = br.readLine()) != null) {
                 String[] values = linea.split(" ");
                 for (int i = 0; i<values.length; i++) {
-                matrizdistancia[contador][i] = values[i].charAt(0);
-                matrizdistancia2[contador][i] = values[i].charAt(0);
-                pw.print(values[i].charAt(0)+" ");
-                contador++;
+                matrizdistancia[contador][i] = Integer.parseInt(values[i]);
+                matrizdistancia2[contador][i] = Integer.parseInt(values[i]);
+                pw.print(values[i]+" ");
+                
             }
+                contador++;
                 pw.print("\n");
             }
             
             TrabajoWarshall cl = new TrabajoWarshall(matrizdistancia,matrizdistancia2,new int[matrizdistancia.length][matrizdistancia.length]);
-            cl.RutaMasCorta();  
+            cl.calcularRuta();
             pw.println("--------------Matriz SALIDA----------------");            
-            for (int i = 0; i < cl.getMatrizdistancia().length; i++) {
-                for (int j = 0; j < cl.getMatrizdistancia().length; j++) {
-                    pw.print(cl.getMatrizdistancia()[i][j] + " ");
+            for (int i = 0; i < cl.getMatrizcopia().length; i++) {
+                for (int j = 0; j < cl.getMatrizcopia().length; j++) {
+                    pw.print(cl.getMatrizcopia()[i][j] + " ");
             }
-            System.out.println();
+            pw.print("\n");
         }
         } catch (Exception e) {
             e.printStackTrace();
