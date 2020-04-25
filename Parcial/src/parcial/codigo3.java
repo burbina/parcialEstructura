@@ -75,7 +75,7 @@ public class codigo3 {
             }
             
             TrabajoWarshall cl = new TrabajoWarshall(matrizdistancia,matrizdistancia2,new int[matrizdistancia.length][matrizdistancia.length]);
-            cl.RutaMasCorta();
+            cl.RutaMasCorta();  
             pw.println("--------------Matriz SALIDA----------------");            
             for (int i = 0; i < cl.getMatrizdistancia().length; i++) {
                 for (int j = 0; j < cl.getMatrizdistancia().length; j++) {
