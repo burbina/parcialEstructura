@@ -16,6 +16,7 @@ public class TrabajoWarshall {
     }
 
     public TrabajoWarshall(int[][] matrizdistancia, int[][] matrizdistancia2, int[][] matrizcopia) {
+        
         this.matrizdistancia = matrizdistancia;
         this.matrizdistancia2 = matrizdistancia2;
         this.matrizcopia = matrizcopia;
@@ -87,32 +88,18 @@ public class TrabajoWarshall {
             }
         }
 
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Vértice inicial (Entre 0 y 4): ");
-        int inicio = scan.nextInt();
-        System.out.println("Vértice final (Entre 0 y 4): ");
-        int fin = scan.nextInt();
-        int fin2 = fin;
 
-        String ruta = fin + "";
-        System.out.println("--------------------------------");
-        System.out.println("Matriz de Adyacencia");
-        System.out.println();
+//        System.out.println("--------------------------------");
+//        System.out.println("Matriz de Adyacencia");
+//        System.out.println();
+//
+//        for (int i = 0; i < getMatrizcopia().length; i++) {
+//            for (int j = 0; j < getMatrizcopia().length; j++) {
+//                System.out.print(getMatrizcopia()[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
 
-        for (int i = 0; i < getMatrizcopia().length; i++) {
-            for (int j = 0; j < getMatrizcopia().length; j++) {
-                System.out.print(getMatrizcopia()[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        while (getMatrizcopia()[inicio][fin] != inicio) {
-            ruta = getMatrizcopia()[inicio][fin] + " -> " + ruta;
-            fin = getMatrizcopia()[inicio][fin];
-        }
-
-        ruta = inicio + " -> " + ruta;
-        System.out.println("La ruta para ir desde el vértice:" + inicio + " Hasta el vértice: " + fin2 + " es: " + ruta);
     }
 
     public void imprimir() {
